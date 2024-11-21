@@ -27,4 +27,10 @@ This project demonstrates the deployment of a web application using DevOps tools
 ## Usage
 1. Clone the repository.
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/koushik12098/guarder.git
+2. Configure Jenkins with the pipeline and set up Webhook integration with GitHub.
+3. Run the Ansible playbook to deploy the application.
+   ```bash
+   ansible-playbook /path/to/deployment.yaml
+4. Access the application using the public IP of the Docker instance.
+
