@@ -18,10 +18,15 @@ This project demonstrates the deployment of a web application using DevOps tools
 2. Jenkins executes a CI/CD pipeline that builds the Docker image and deploys containers.
 3. Ansible playbooks manage container creation, stopping, and removal on the Docker instance.
 4. The web application is hosted on the Docker instance and accessible via the provided public IP.
-
+## Pipeline Configuration
+   The **Execute Shell** step in the Jenkins pipeline includes the following commands:
+   ```bash
+   scp -r /var/lib/jenkins/workspace/ansible-jenkins-pipeline/* root@172.31.41.15:/project (docker private ip)
+   ansible-playbook /var/lib/jenkins/playbooks/deployment.yaml
+   ```
 ## Prerequisites
 - AWS account with two Ubuntu 24.04 LTS EC2 instances (T2.micro, 10 GB storage).
-- Installed and configured Docker, Jenkins, and Ansible.
+- Install and configure Docker in one instance and Jenkins, and Ansible in the other instance.
 - GitHub repository containing application code and Dockerfile.
 
 ## Usage
