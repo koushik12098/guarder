@@ -1,0 +1,33 @@
+- name: Build & Deploy Docker Container
+  hosts: dockerservers
+  gather_facts: false
+  remote_user: root
+
+  tasks:
+    - name: Build Docker Image
+      docker_image:
+        name: webapp
+        source: build
+        build:
+          path: ~/project/
+        state: present
+
+    - name: Stop Existing Container
+      docker_container:
+        name: webapp-container
+        state: stopped
+        ignore_errors: yes
+
+    - name: Remove Existing Container
+      docker_container:
+        name: webapp-container
+        state: absent
+        ignore_errors: yes
+
+    - name: Deploy New Container
+      docker_container:
+        name: webapp-container
+        image: webapp
+        ports:
+          - "8080:80"
+        state: started
